@@ -1,7 +1,10 @@
 /*
  * Create a list that holds all of your cards
  */
-
+//const listOfCards = document.createElement ('ul');
+//
+//let cardList = document.createElement('li');
+//cardList
 
 /*
  * Display the cards on the page
@@ -12,7 +15,8 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -25,14 +29,50 @@ function shuffle(array) {
     return array;
 }
 
+
+
 let deckOfCards = document.querySelectorAll('.card');
+let shownCards = new Array;
+//activeCards();
 
-deckOfCards.forEach(function(card){
-    card.addEventListener('click',function(ev){
-        card.classList.add('open', 'show');
-    });
-});
+//deckOfCards.forEach(function(card) {
+//    
+//        card.addEventListener('click', function(e) {
+//            if (shownCards.length >= 2) {
+//                //hide
+//            }
+//            else{
+//                shownCards.push(card);
+//            card.classList.add('open', 'show');
+//        });
+// 
+//});
 
+    //set up event listener
+    //function activeCards(){
+       deckOfCards.forEach(function(card) {
+           card.addEventListener('click', (function(ev){
+               shownCards.push('card');
+               
+               if (shownCards.length <=2) {
+               card.classList.add('open', 'show');
+                   //check to see if cards match
+               }else{
+                   hideCards(card);
+            console.log(shownCards.length)}
+             
+               
+                                 })
+                                 )});
+    
+                               
+    function hideCards(card){
+        card.classList.remove('open', 'show');
+    };
+
+function checkMatch(){
+    
+};
 
 /*
  * set up the event listener for a card. If a card is clicked:
