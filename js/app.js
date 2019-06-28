@@ -33,45 +33,43 @@ function shuffle(array) {
 
 let deckOfCards = document.querySelectorAll('.card');
 let shownCards = [];
-//activeCards();
 
 
-    //set up event listener
-    //function activeCards(){
-       deckOfCards.forEach(function(card) {
-           card.addEventListener('click', (function(ev){
-               shownCards.push(card);
-               card.classList.add('open', 'show');
-               console.log(shownCards.length);
-               
-               
-               if (shownCards.length % 2 === 0) {
-                   setTimeout(function(){
-                        shownCards.forEach(function(card) {
-                        card.classList.remove('open', 'show');
-                   });
-                  
-                   }, 3000);
-                  
-               }
-//          
-                   //check to see if cards match
-               }
-                   //hideCards(card);
-                  
-            ));
-             
-               
-                                 
-                                 });
-    
-                               
-    function hideCards(card){
-       // card.classList.remove('open', 'show');
-    };
 
-function checkMatch(){
-    
+//add event listener to cards
+
+deckOfCards.forEach(function (card) {
+    card.addEventListener('click', (function (ev) {
+            shownCards.push(card);
+            showCards(card);
+        
+            if (shownCards.length % 2 === 0) {
+                hideCards(card);
+            }
+        }
+    ));
+});
+
+//flip selected cards over
+
+function showCards(card) {
+    card.classList.add('open', 'show');
+};
+
+//hide cards after period of time
+
+function hideCards(card) {
+    setTimeout(function () {
+        shownCards.forEach(function (card) {
+            card.classList.remove('open', 'show');
+        });
+
+    }, 1500);
+};
+
+//check to see if cards match
+
+function checkMatch() {
 };
 
 /*
