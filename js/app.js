@@ -32,42 +32,42 @@ function shuffle(array) {
 
 
 let deckOfCards = document.querySelectorAll('.card');
-let shownCards = new Array;
+let shownCards = [];
 //activeCards();
 
-//deckOfCards.forEach(function(card) {
-//    
-//        card.addEventListener('click', function(e) {
-//            if (shownCards.length >= 2) {
-//                //hide
-//            }
-//            else{
-//                shownCards.push(card);
-//            card.classList.add('open', 'show');
-//        });
-// 
-//});
 
     //set up event listener
     //function activeCards(){
        deckOfCards.forEach(function(card) {
            card.addEventListener('click', (function(ev){
-               shownCards.push('card');
-               
-               if (shownCards.length <=2) {
+               shownCards.push(card);
                card.classList.add('open', 'show');
+               console.log(shownCards.length);
+               
+               
+               if (shownCards.length % 2 === 0) {
+                   setTimeout(function(){
+                        shownCards.forEach(function(card) {
+                        card.classList.remove('open', 'show');
+                   });
+                  
+                   }, 3000);
+                  
+               }
+//          
                    //check to see if cards match
-               }else{
-                   hideCards(card);
-            console.log(shownCards.length)}
+               }
+                   //hideCards(card);
+                  
+            ));
              
                
-                                 })
-                                 )});
+                                 
+                                 });
     
                                
     function hideCards(card){
-        card.classList.remove('open', 'show');
+       // card.classList.remove('open', 'show');
     };
 
 function checkMatch(){
