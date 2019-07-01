@@ -40,13 +40,16 @@ let shownCards = [];
 
 deckOfCards.forEach(function (card) {
     card.addEventListener('click', (function (ev) {
+        if ((!card.classList.contains('show')) && shownCards.length < 2) {
             shownCards.push(card);
             showCards(card);
+        }
+          
         
             if (shownCards.length % 2 === 0) {
                 hideCards(card);
             }
-        }
+    }
     ));
 });
 
@@ -63,7 +66,7 @@ function hideCards(card) {
         shownCards.forEach(function (card) {
             card.classList.remove('open', 'show');
         });
-
+        shownCards = [];
     }, 1500);
 };
 
