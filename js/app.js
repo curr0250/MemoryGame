@@ -1,6 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
+//create list of cards
 
 let cards = ['fa-diamond', 'fa-diamond',
             'fa-paper-plane-o', 'fa-paper-plane-o', 
@@ -13,6 +11,7 @@ let cards = ['fa-diamond', 'fa-diamond',
             ];
 
 //create the HTML element for each card
+
 function createCard(card) {
     return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 };
@@ -25,17 +24,13 @@ function createCard(card) {
  *   - add each card's HTML to the page
  */
 
-
-
 function createGame() {
     let deck = document.querySelector('.deck');
-//    let moveCount = document.querySelector('.moves');
-    
     let cardHTML= shuffle(cards).map(function(card) {
         return createCard(card);
     });
     deck.innerHTML = cardHTML.join('');
-    
+   
 }
 createGame();
 
@@ -56,16 +51,21 @@ function shuffle(array) {
 }
 
 
-
-
+//set up variables to play game
 let deckOfCards = document.querySelectorAll('.card');
 let shownCards = [];
-//let moves = 0;
+let matchedPairs = [];
+let win = false;
+let moves = 0;
+let showMoves = document.querySelector('.moves');
 
-
+//keeps track of and displays number of moves
+function keepCount() {
+    moves += 1;
+    showMoves.textContent = `Moves: ${moves}`;
+}
 
 //add event listener to cards
-
 deckOfCards.forEach(function (card) {
     card.addEventListener('click', (function (ev) {
         if ((!card.classList.contains('show')) && shownCards.length < 2) {
@@ -82,17 +82,15 @@ deckOfCards.forEach(function (card) {
 });
 
 //flip selected cards over
-
 function showCards(card) {
     card.classList.add('open', 'show');
     if (shownCards.length == 2) {
         checkMatch(card);
-        //moves +=1;
+        keepCount();
     }
 };
 
 //hide cards after period of time
-
 function hideCards(card) {
     setTimeout(function () {
         shownCards.forEach(function (card) {
@@ -103,7 +101,6 @@ function hideCards(card) {
 };
 
 //check to see if cards match
-
 function checkMatch(card) {
     if (shownCards[0].dataset.card == shownCards[1].dataset.card) {
         shownCards[0].classList.add('match');
@@ -115,11 +112,33 @@ function checkMatch(card) {
         shownCards[1].classList.remove('show');
         
         shownCards = [];
+        matchedPairs += 1;
+        if (matchedPairs.length == 8) {
+            win = true;
+            winGame();
+        };
         
     }else{
         hideCards(card);
     }
 };
+
+let modal = document.querySelector(".modal");
+let closeButton = document.querySelector(".close-button");
+let fireModal = document.querySelector(".trigger");
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+fireModal.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+
+
+function winGame() {
+    fireModal.click();
+    
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
