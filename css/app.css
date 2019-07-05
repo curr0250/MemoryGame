@@ -116,6 +116,18 @@ h1 {
     padding-left: 70px;
 }
 
+#star1.fa.fa-star.close{
+    color: white;
+}
+
+#star2.fa.fa-star.close{
+    color: white;
+}
+
+#star3.fa.fa-star.close{
+    color: white;
+}
+
 .modal {
     position: fixed;
     left: 0;

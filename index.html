@@ -17,9 +17,9 @@
 
         <section class="score-panel">
         	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<li><i id="star1" class="fa fa-star"></i></li>
+        		<li><i id="star2" class="fa fa-star"></i></li>
+        		<li><i id="star3" class="fa fa-star"></i></li>
         	</ul>
 
         	<span class="moves"></span>
@@ -41,8 +41,11 @@
             <span class="close-button">&times;</span>
             <h1>Congratulations!</h1>
             <h1> you won!</h1>
-            <h3>you needed 10 turns</h3>
-            <h3>your time was 1:28 minutes</h3>
+            <h3>you scored <span class="finalStars"></span> STARS!</h3>
+            <h3>your time was <span class="finalTime"></span> minutes</h3>
+            <h3>Would you like to play again?</h3>
+            <button class="yes">YES!</button>
+            <button class="no">No thanks</button>
         </div>
         </div>
     </div>
