@@ -1,8 +1,8 @@
 //create list of cards
 
 let cards = ['fa-diamond', 'fa-diamond',
-            'fa-paper-plane-o', 'fa-paper-plane-o', 
-             'fa-anchor', 'fa-anchor', 
+            'fa-paper-plane-o', 'fa-paper-plane-o',
+             'fa-anchor', 'fa-anchor',
              'fa-bolt', 'fa-bolt',
             'fa-cube', 'fa-cube',
             'fa-anchor', 'fa-anchor',
@@ -16,6 +16,10 @@ function createCard(card) {
     return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 };
 
+//set up timer variables to play game
+let totalSec = 0;
+let timeUsed = setInterval(countTimer, 1000);
+
 
 /*
  * Display the cards on the page
@@ -26,11 +30,11 @@ function createCard(card) {
 
 function createGame() {
     let deck = document.querySelector('.deck');
-    let cardHTML= shuffle(cards).map(function(card) {
+    let cardHTML = shuffle(cards).map(function (card) {
         return createCard(card);
     });
     deck.innerHTML = cardHTML.join('');
-   keepTime();
+    countTimer();
 }
 createGame();
 
@@ -50,39 +54,37 @@ function shuffle(array) {
     return array;
 }
 
-
-//set up variables to play game
-let deckOfCards = document.querySelectorAll('.card');
-let shownCards = [];
-let matchedPairs = [];
-let win = false;
-let totalSec = 0;
 let moves = 0;
 let showMoves = document.querySelector('.moves');
 
 //keeps track of and displays number of moves
 function keepCount() {
-    moves += 1;
+    moves ++;
     showMoves.textContent = `Moves: ${moves}`;
 }
 
+
 //keep track of and display time
-function keepTime() {
-    let timeUsed = setInterval(countTimer, 1000);
-    
-    function countTimer(){
-        ++totalSec;
-        let hour = Math.floor(totalSec/ 3600);
-        let min = Math.floor((totalSec - hour*3600)/60);
-        let sec = totalSec - (hour*3600 + min*60);
-        document.querySelector(".timer").innerHTML = min + ":" + sec;
-    }
-}
+
+function countTimer() {
+    ++totalSec;
+    let hour = Math.floor(totalSec / 3600);
+    let min = Math.floor((totalSec - hour * 3600) / 60);
+    let sec = totalSec - (hour * 3600 + min * 60);
+    document.querySelector(".timer").innerHTML = min + ":" + sec;
+};
+
 
 //stop time
-function stopTime(){
+function stopTime() {
     clearInterval(timeUsed);
-}
+};
+
+
+let deckOfCards = document.querySelectorAll('.card');
+let shownCards = [];
+let matchedPairs = [];
+let win = false;
 
 //add event listener to cards
 deckOfCards.forEach(function (card) {
@@ -90,15 +92,14 @@ deckOfCards.forEach(function (card) {
         if ((!card.classList.contains('show')) && shownCards.length < 2) {
             shownCards.push(card);
             showCards(card);
-            
+
         }
-          
-        
-            if (shownCards.length % 2 === 0) {
-                hideCards(card);
-            }
-    }
-    ));
+
+
+        if (shownCards.length % 2 === 0) {
+            hideCards(card);
+        }
+    }));
 });
 
 //flip selected cards over
@@ -117,7 +118,7 @@ function hideCards(card) {
             card.classList.remove('open', 'show');
         });
         shownCards = [];
-    }, 1500);
+    }, 1000);
 };
 
 //check to see if cards match
@@ -126,11 +127,11 @@ function checkMatch(card) {
         shownCards[0].classList.add('match');
         shownCards[0].classList.remove('open');
         shownCards[0].classList.remove('show');
-        
+
         shownCards[1].classList.add('match');
         shownCards[1].classList.remove('open');
         shownCards[1].classList.remove('show');
-        
+
         shownCards = [];
         matchedPairs += 1;
         if (matchedPairs.length == 8) {
@@ -138,12 +139,25 @@ function checkMatch(card) {
             winGame();
             stopTime();
         };
-        
-    }else{
+
+    } else {
         hideCards(card);
     }
 };
 
+let reset = document.querySelector(".restart");
+reset.addEventListener("click", function(ev){
+    totalSec = 0;
+    moves = 0;
+    showMoves.textContent = `Moves: ${moves}`;
+    createGame();
+});
+////reset game
+//function resetGame(){
+//    
+//}
+
+//modal
 let modal = document.querySelector(".modal");
 let closeButton = document.querySelector(".close-button");
 let fireModal = document.querySelector(".trigger");
@@ -158,7 +172,7 @@ closeButton.addEventListener("click", toggleModal);
 
 function winGame() {
     fireModal.click();
-    
+
 }
 
 /*
