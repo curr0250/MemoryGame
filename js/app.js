@@ -30,7 +30,7 @@ function createGame() {
         return createCard(card);
     });
     deck.innerHTML = cardHTML.join('');
-   
+   keepTime();
 }
 createGame();
 
@@ -56,6 +56,7 @@ let deckOfCards = document.querySelectorAll('.card');
 let shownCards = [];
 let matchedPairs = [];
 let win = false;
+let totalSec = 0;
 let moves = 0;
 let showMoves = document.querySelector('.moves');
 
@@ -65,12 +66,31 @@ function keepCount() {
     showMoves.textContent = `Moves: ${moves}`;
 }
 
+//keep track of and display time
+function keepTime() {
+    let timeUsed = setInterval(countTimer, 1000);
+    
+    function countTimer(){
+        ++totalSec;
+        let hour = Math.floor(totalSec/ 3600);
+        let min = Math.floor((totalSec - hour*3600)/60);
+        let sec = totalSec - (hour*3600 + min*60);
+        document.querySelector(".timer").innerHTML = min + ":" + sec;
+    }
+}
+
+//stop time
+function stopTime(){
+    clearInterval(timeUsed);
+}
+
 //add event listener to cards
 deckOfCards.forEach(function (card) {
     card.addEventListener('click', (function (ev) {
         if ((!card.classList.contains('show')) && shownCards.length < 2) {
             shownCards.push(card);
             showCards(card);
+            
         }
           
         
@@ -116,6 +136,7 @@ function checkMatch(card) {
         if (matchedPairs.length == 8) {
             win = true;
             winGame();
+            stopTime();
         };
         
     }else{

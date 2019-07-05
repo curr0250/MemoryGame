@@ -108,6 +108,10 @@ h1 {
     cursor: pointer;
 }
 
+.score-panel .timer {
+    width: 50px;
+}
+
 .score-panel .moves {
     padding-left: 70px;
 }
