@@ -60,21 +60,25 @@ function keepCount() {
 let star1 = document.getElementById("star1");
 let star2 = document.getElementById("star2");
 let star3 = document.getElementById("star3");
+let numStars = 3;
 
 //controlnumber of stars
 function setStars(moves) {
 
 
-    if (moves == 2) {
+    if (moves == 12) {
         star1.classList.add('close');
+        numStars --;
     }
 
-    if (moves == 4) {
+    if (moves == 18) {
         star2.classList.add('close');
+        numStars --;
     }
 
-    if (moves == 6) {
+    if (moves == 25) {
         star3.classList.add('close');
+        numStars --;
     }
 };
 
@@ -172,6 +176,7 @@ function resetGame() {
     star1.classList.remove('close');
     star2.classList.remove('close');
     star3.classList.remove('close');
+    numStars = 3;
 }
 
 
@@ -193,10 +198,13 @@ yes.addEventListener("click", function () {
     toggleModal();
 });
 
-let finalTime =document.querySelector("finalTime");
+let finalTime =document.querySelector(".finalTime");
+let finalStars = document.querySelector(".finalStars");
+
 function winGame() {
     if (win = yes) {
-        //finalTime.textContent = ${timeUsed};
+        finalStars.textContent = `You earned ${numStars} STARS!`;
+        finalTime.textContent = `Your time was ${totalSec} seconds` ;
     }
     fireModal.click();
 
