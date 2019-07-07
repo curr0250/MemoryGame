@@ -9,18 +9,19 @@ let cards = ['fa-diamond', 'fa-diamond',
              'fa-bicycle', 'fa-bicycle',
             ];
 
+
 //create the HTML element for each card
 function createCard(card) {
     return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 };
 
-//set up timer variables to play game
+
 let totalSec = 0;
 let timeUsed = setInterval(countTimer, 1000);
-
 let deck = document.querySelector('.deck');
 
-//create cards to play game
+
+//create cards and prepare the game to be played
 function createGame() {
     let cardHTML = shuffle(cards).map(function (card) {
         return createCard(card);
@@ -30,6 +31,7 @@ function createGame() {
     countTimer();
 }
 createGame();
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -47,42 +49,45 @@ function shuffle(array) {
     return array;
 }
 
+
+//tracks number of moves
 let moves = 0;
 let showMoves = document.querySelector('.moves');
 
-//keeps track of and displays number of moves
 function keepCount() {
     moves++;
     showMoves.textContent = `Moves: ${moves}`;
     setStars(moves);
 }
 
+
+//tracks stars
 let star1 = document.getElementById("star1");
 let star2 = document.getElementById("star2");
 let star3 = document.getElementById("star3");
 let numStars = 3;
 
-//controlnumber of stars
 function setStars(moves) {
 
 
-    if (moves == 12) {
+    if (moves == 15) {
         star1.classList.add('close');
-        numStars --;
+        numStars--;
     }
 
-    if (moves == 18) {
+    if (moves == 20) {
         star2.classList.add('close');
-        numStars --;
+        numStars--;
     }
 
     if (moves == 25) {
         star3.classList.add('close');
-        numStars --;
+        numStars--;
     }
 };
 
-//keep track of and display time
+
+//tracks and display time
 function countTimer() {
     totalSec++;
     let hour = Math.floor(totalSec / 3600);
@@ -92,19 +97,17 @@ function countTimer() {
 };
 
 
-
 //stop time
 function stopTime() {
     clearInterval(timeUsed);
 };
 
 
+//begin the game
 let deckOfCards = document.querySelectorAll('.card');
 let shownCards = [];
 let matchedPairs = [];
 let win = false;
-
-
 
 function startGame() {
     deck.addEventListener('click', function (e) {
@@ -116,8 +119,7 @@ function startGame() {
             hideCards();
         }
     });
-    console.log("start gamefunction working");
-}
+};
 
 
 //flip selected cards over
@@ -129,6 +131,7 @@ function showCards(card) {
     }
 };
 
+
 //hide cards after period of time
 function hideCards(card) {
     setTimeout(function () {
@@ -138,6 +141,7 @@ function hideCards(card) {
         shownCards = [];
     }, 1000);
 };
+
 
 //check to see if cards match
 function checkMatch(card) {
@@ -163,6 +167,7 @@ function checkMatch(card) {
     }
 };
 
+
 //reset Game
 let reset = document.querySelector(".restart");
 reset.addEventListener("click", resetGame);
@@ -185,7 +190,6 @@ let modal = document.querySelector(".modal");
 let closeButton = document.querySelector(".close-button");
 let fireModal = document.querySelector(".trigger");
 let yes = document.querySelector(".yes");
-//let no = document.querySelector(".no");
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
@@ -198,13 +202,14 @@ yes.addEventListener("click", function () {
     toggleModal();
 });
 
-let finalTime =document.querySelector(".finalTime");
+let finalTime = document.querySelector(".finalTime");
 let finalStars = document.querySelector(".finalStars");
 
+//display results in modal
 function winGame() {
     if (win = yes) {
         finalStars.textContent = `You earned ${numStars} STARS!`;
-        finalTime.textContent = `Your time was ${totalSec} seconds` ;
+        finalTime.textContent = `Your time was ${totalSec} seconds`;
     }
     fireModal.click();
 
