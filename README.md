@@ -12,8 +12,13 @@ $ git clone https://github.com/curr0250/MemoryGame.git
 
 ## Usage
 
-The timer will start as soon as the game is loaded. Click on 2 card to see if the match. If they do not match, the cards will flip back over. If they do match,the card will change colors and stay visible. Continue until all cards pairs are matched. 
+The timer will start as soon as the game is loaded. Click on 2 card to see if the match. If they do not match, the cards will flip back over. If they do match, the card will change colors and stay visible. Continue until all cards pairs are matched. 
 
+
+## Dependencies
+
+* jQuery
+* fontawesome
 
 ## Built With
 
