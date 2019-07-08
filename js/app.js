@@ -99,7 +99,7 @@ function countTimer() {
 
 //stop time
 function stopTime() {
-    clearInterval(timeUsed);
+   clearInterval(timeUsed);
 };
 
 
@@ -167,25 +167,6 @@ function checkMatch(card) {
     }
 };
 
-
-//reset Game
-let reset = document.querySelector(".restart");
-reset.addEventListener("click", resetGame);
-
-function resetGame() {
-    totalSec = 0;
-    moves = 0;
-    countTimer();
-    showMoves.textContent = `Moves: ${moves}`;
-    createGame();
-    star1.classList.remove('close');
-    star2.classList.remove('close');
-    star3.classList.remove('close');
-    numStars = 3;
-    shownCards = [];
-}
-
-
 //modal
 let modal = document.querySelector(".modal");
 let closeButton = document.querySelector(".close-button");
@@ -214,4 +195,23 @@ function winGame() {
     }
     fireModal.click();
 
+};
+
+//reset Game
+let reset = document.querySelector(".restart");
+reset.addEventListener("click", resetGame);
+
+function resetGame() {
+    totalSec = 0;
+    moves = 0;
+    showMoves.textContent = `Moves: ${moves}`;
+    createGame();
+    let timeUsed = setInterval(countTimer, 1000);
+    star1.classList.remove('close');
+    star2.classList.remove('close');
+    star3.classList.remove('close');
+    numStars = 3;
+    shownCards = [];
+    matchedPairs = 0;
+    win = false;
 };
