@@ -31,9 +31,12 @@ The timer will start as soon as the game is loaded. Click on 2 card to see if th
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> e27840a4cc7417b847ac39f96bd10d444ac5edd5
 =======
 >>>>>>> e27840a4cc7417b847ac39f96bd10d444ac5edd5
 
