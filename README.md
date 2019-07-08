@@ -9,14 +9,6 @@ Clone the github repository and install. Game is best played using a screen size
 
 $ git clone https://github.com/curr0250/MemoryGame.git
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
 
 ## Usage
 
