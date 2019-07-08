@@ -1,10 +1,10 @@
 //create list of cards
 let cards = ['fa-diamond', 'fa-diamond',
-            'fa-paper-plane-o', 'fa-paper-plane-o',
+            'fa-bomb', 'fa-bomb',
              'fa-anchor', 'fa-anchor',
              'fa-bolt', 'fa-bolt',
             'fa-cube', 'fa-cube',
-            'fa-anchor', 'fa-anchor',
+            'fa-automobile', 'fa-automobile',
             'fa-leaf', 'fa-leaf',
              'fa-bicycle', 'fa-bicycle',
             ];
@@ -27,8 +27,8 @@ function createGame() {
         return createCard(card);
     });
     deck.innerHTML = cardHTML.join('');
-    startGame();
     countTimer();
+    startGame();
 }
 createGame();
 
@@ -175,13 +175,14 @@ reset.addEventListener("click", resetGame);
 function resetGame() {
     totalSec = 0;
     moves = 0;
-    console.log("gotit");
+    countTimer();
     showMoves.textContent = `Moves: ${moves}`;
     createGame();
     star1.classList.remove('close');
     star2.classList.remove('close');
     star3.classList.remove('close');
     numStars = 3;
+    shownCards = [];
 }
 
 
